@@ -1,4 +1,7 @@
-# DiscordBotBase
+# RPBot
+RPBot Version 2 is based on the DiscordBotBase, using Discord.net .
+
+### DiscordBotBase
 
 This repository contains blank templates to create a bot using Discord.Net 1.0
 
