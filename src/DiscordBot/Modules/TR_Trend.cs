@@ -23,7 +23,7 @@ namespace DiscordBot.Modules
                     webClient.DownloadFile(Context.User.GetAvatarUrl(Discord.ImageFormat.Png).ToString(), "pfp.png");
                 }
                 Image pfp = Image.FromFile("pfp.png");
-                Image overlay = Image.FromFile(@"D:\Projects\Git\DiscordBotBase-csharp\src\DiscordBot\Resources\tr_Overlay.png");
+                Image overlay = Image.FromFile(@"Resources/tr_Overlay.png");
                 overlay = ResizeImage(overlay, pfp.Width, pfp.Height);
                 //overlay = SetImageOpacity(overlay, opacity);
 

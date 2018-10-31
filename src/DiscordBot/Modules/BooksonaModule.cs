@@ -14,7 +14,7 @@ namespace DiscordBot.Modules
             {
                 using (WebClient webClient = new WebClient())
                 {
-                    webClient.DownloadFile(url, @"D:\Projects\TWOW\art\Booksonas\" + Context.User.Username + ".png");
+                    webClient.DownloadFile(url, @"/Booksonas/" + Context.User.Username + ".png");
                 }
                 return ReplyAsync("Allright, your booksona is now: " + url);
             }

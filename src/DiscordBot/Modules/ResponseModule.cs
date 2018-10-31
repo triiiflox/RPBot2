@@ -21,7 +21,12 @@ namespace DiscordBot.Modules
                             $"sorry for this, **you can use ; instead.**");
                 }
 
-                if (!File.Exists(@"D:\Projects\TWOW\MEATWOW\Botout\" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv"))
+                if (!Directory.Exists($"/MEAT S{Resources.Variables.Season}"))
+                {
+                    Directory.CreateDirectory($"/MEAT S{Resources.Variables.Season}");
+                }
+
+                if (!File.Exists($"/MEAT S{Resources.Variables.Season}/" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv"))
                 {
                     var Firstline = new StringBuilder();
                     Firstline.Append("DateTime");
@@ -30,7 +35,7 @@ namespace DiscordBot.Modules
                     Firstline.Append(",Response");
                     Firstline.Append(",Word count");
 
-                    File.AppendAllText(@"D:\Projects\TWOW\MEATWOW\Botout\" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv", Firstline.ToString() + "\n");
+                    File.AppendAllText($"/MEAT S{Resources.Variables.Season}/" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv", Firstline.ToString() + "\n");
                 }
 
                 var csv = new StringBuilder();
@@ -40,7 +45,7 @@ namespace DiscordBot.Modules
                 csv.Append("," + string.Join(" ", response));
                 csv.Append("," + response.Length);
 
-                File.AppendAllText(@"D:\Projects\TWOW\MEATWOW\Botout\" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv", csv.ToString() + "\n");
+                File.AppendAllText($"/MEAT S{Resources.Variables.Season}/" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv", csv.ToString() + "\n");
 
                 return ReplyAsync(
                     $"Thanks {this.Context.User.Username}, your response:\n" +
