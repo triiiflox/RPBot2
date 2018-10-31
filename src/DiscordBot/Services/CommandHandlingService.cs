@@ -43,7 +43,9 @@ namespace DiscordBot.Services
 
             if (result.Error.HasValue &&
                 result.Error.Value != CommandError.UnknownCommand)
+            {
                 await context.Channel.SendMessageAsync(result.ToString());
+            }
         }
     }
 }

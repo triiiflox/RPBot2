@@ -8,11 +8,11 @@ using Discord.WebSocket;
 
 namespace DiscordBot.AdminModules
 {
-    internal class CheckRole
+    internal static class CheckRole
     {
         internal static bool CheckUserRole(SocketGuildUser user, string roleName = "The Director")
         {
-            var role = (user as IGuildUser).Guild.Roles.FirstOrDefault(x => x.Name == roleName);
+            var role = (user as IGuildUser)?.Guild.Roles.FirstOrDefault(x => x.Name == roleName);
             return user.Roles.Contains(role);
         }
     }

@@ -14,7 +14,7 @@ namespace DiscordBot.Modules
         {
             if (this.Context.IsPrivate)
             {
-                Regex rx = new Regex(@"[[]{1}[A-Z]{3,} [A-Z]{10}]");
+                Regex rx = new Regex("[[]{1}[A-Z]{3,} [A-Z]{10}]");
 
                 string input = string.Join(" ", response);
                 if (!rx.IsMatch(input))
@@ -30,7 +30,7 @@ namespace DiscordBot.Modules
                     Directory.CreateDirectory($"/MEAT S{Resources.Variables.Season}");
                 }
 
-                if (!File.Exists($"/MEAT S{Resources.Variables.Season}/" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv"))
+                if (!File.Exists($"/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv"))
                 {
                     var Firstline = new StringBuilder();
                     Firstline.Append("DateTime");
@@ -48,24 +48,24 @@ namespace DiscordBot.Modules
                     Firstline.Append(",9");
                     Firstline.Append(",10");
 
-                    File.AppendAllText($"/MEAT S{Resources.Variables.Season}/" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv", Firstline.ToString() + "\n");
+                    File.AppendAllText($"/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv", Firstline.ToString() + "\n");
                 }
 
                 var csv = new StringBuilder();
                 csv.Append(DateTime.Now);
-                csv.Append("," + this.Context.User.Username);
-                csv.Append(",#" + this.Context.User.Discriminator);
+                csv.Append(",").Append(this.Context.User.Username);
+                csv.Append(",#").Append(this.Context.User.Discriminator);
 
                 var RawVote = string.Join(" ", response);
-                Regex vrx = new Regex(@"[[]{1}([A-Z]{3,}) ([A-Z]{10})]");
+                Regex vrx = new Regex("[[]{1}([A-Z]{3,}) ([A-Z]{10})]");
                 var vote = vrx.Split(RawVote);
-                csv.Append("," + vote[1]);
+                csv.Append(",").Append(vote[1]);
                 foreach (var V in vote[2])
                 {
-                    csv.Append("," + V);
+                    csv.Append(",").Append(V);
                 }
 
-                File.AppendAllText($"/MEAT S{Resources.Variables.Season}/" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv", csv.ToString() + "\n");
+                File.AppendAllText($"/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv", csv.ToString() + "\n");
 
                 return ReplyAsync(
                     $"Thanks {this.Context.User.Username}, your Vote:\n" +

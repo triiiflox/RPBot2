@@ -3,7 +3,6 @@ using Discord.Commands;
 
 namespace DiscordBot.Modules
 {
-
     public class PromptModule : ModuleBase<SocketCommandContext>
     {
         [Command("prompt")]

@@ -11,7 +11,7 @@ namespace DiscordBot.Modules
         [Command("respond")]
         public Task Respond(params string[] response)
         {
-            if (this.Context.IsPrivate)
+            if (Context.IsPrivate)
             {
                 if (string.Join(" ", response).Contains(","))
                 {
@@ -26,7 +26,7 @@ namespace DiscordBot.Modules
                     Directory.CreateDirectory($"/MEAT S{Resources.Variables.Season}");
                 }
 
-                if (!File.Exists($"/MEAT S{Resources.Variables.Season}/" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv"))
+                if (!File.Exists($"/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv"))
                 {
                     var Firstline = new StringBuilder();
                     Firstline.Append("DateTime");
@@ -35,26 +35,26 @@ namespace DiscordBot.Modules
                     Firstline.Append(",Response");
                     Firstline.Append(",Word count");
 
-                    File.AppendAllText($"/MEAT S{Resources.Variables.Season}/" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv", Firstline.ToString() + "\n");
+                    File.AppendAllText($"/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv", Firstline.ToString() + "\n");
                 }
 
                 var csv = new StringBuilder();
                 csv.Append(DateTime.Now);
-                csv.Append("," + this.Context.User.Username);
-                csv.Append(",#" + this.Context.User.Discriminator);
-                csv.Append("," + string.Join(" ", response));
-                csv.Append("," + response.Length);
+                csv.Append(",").Append(Context.User.Username);
+                csv.Append(",#").Append(Context.User.Discriminator);
+                csv.Append(",").Append(string.Join(" ", response));
+                csv.Append(",").Append(response.Length);
 
-                File.AppendAllText($"/MEAT S{Resources.Variables.Season}/" + $"S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv", csv.ToString() + "\n");
+                File.AppendAllText($"/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Responses.csv", csv.ToString() + "\n");
 
                 return ReplyAsync(
-                    $"Thanks {this.Context.User.Username}, your response:\n" +
+                    $"Thanks {Context.User.Username}, your response:\n" +
                     $"{string.Join(" ", response)}\n" +
                     $"has been **recorded** :thumbsup:");
             }
             else
             {
-                this.Context.Message.DeleteAsync();
+                Context.Message.DeleteAsync();
                 return ReplyAsync(
                     $"Please send me your response in a Private/Direct Message.");
             }
