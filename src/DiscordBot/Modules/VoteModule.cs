@@ -25,12 +25,12 @@ namespace DiscordBot.Modules
                             $"If your vote was correctly formatted and it you still get this message, please send the vote directly to @Meatyflesh#2138 .");
                 }
 
-                if (!Directory.Exists($"/MEAT S{Resources.Variables.Season}"))
+                if (!Directory.Exists($"Resources/MEAT S{Resources.Variables.Season}"))
                 {
-                    Directory.CreateDirectory($"/MEAT S{Resources.Variables.Season}");
+                    Directory.CreateDirectory($"Resources/MEAT S{Resources.Variables.Season}");
                 }
 
-                if (!File.Exists($"/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv"))
+                if (!File.Exists($"Resources/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv"))
                 {
                     var Firstline = new StringBuilder();
                     Firstline.Append("DateTime");
@@ -48,7 +48,7 @@ namespace DiscordBot.Modules
                     Firstline.Append(",9");
                     Firstline.Append(",10");
 
-                    File.AppendAllText($"/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv", Firstline.ToString() + "\n");
+                    File.AppendAllText($"Resources/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv", Firstline.ToString() + "\n");
                 }
 
                 var csv = new StringBuilder();
@@ -65,7 +65,7 @@ namespace DiscordBot.Modules
                     csv.Append(",").Append(V);
                 }
 
-                File.AppendAllText($"/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv", csv.ToString() + "\n");
+                File.AppendAllText($"Resources/MEAT S{Resources.Variables.Season}/S{Resources.Variables.Season}E{Resources.Variables.Round} - Votes.csv", csv.ToString() + "\n");
 
                 return ReplyAsync(
                     $"Thanks {this.Context.User.Username}, your Vote:\n" +

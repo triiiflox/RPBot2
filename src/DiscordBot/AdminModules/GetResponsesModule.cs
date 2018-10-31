@@ -15,13 +15,13 @@ namespace DiscordBot.AdminModules
         [Command("getResponses")]
         public Task GetResponses(int S, int E)
         {
-            if (!File.Exists($"/MEAT S{Resources.Variables.Season}/S{S}E{E} - Responses.csv"))
+            if (!File.Exists($"Resources/MEAT S{Resources.Variables.Season}/S{S}E{E} - Responses.csv"))
             {
                 return ReplyAsync($"Failed,That Season or Episode does not exist yet.");
             }
 
             return CheckRole.CheckUserRole(Context.User as SocketGuildUser)
-                ? Context.Channel.SendFileAsync($"/MEAT S{Resources.Variables.Season}/S{S}E{E} - Responses.csv", "Here ya go")
+                ? Context.Channel.SendFileAsync($"Resources/MEAT S{Resources.Variables.Season}/S{S}E{E} - Responses.csv", "Here ya go")
                 : (Task)ReplyAsync($"Failed, you do not have permission to do that.");
         }
     }
