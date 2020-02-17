@@ -16,11 +16,11 @@ namespace DiscordBot.AdminModules
         {
             if (CheckRole.CheckUserRole(Context.User as SocketGuildUser))
             {
-                Resources.Variables.Prompt = string.Join(" ", prompt);
+                Properties.Settings.Default.Prompt = string.Join(" ", prompt);
 
                 return ReplyAsync(
                     $"Succes!\n" +
-                    $"Current Prompt is: **{Resources.Variables.Prompt}**");
+                    $"Current Prompt is: **{Properties.Settings.Default.Prompt}**");
             }
             else
             {

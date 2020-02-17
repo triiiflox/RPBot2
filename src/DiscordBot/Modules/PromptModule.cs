@@ -8,6 +8,6 @@ namespace DiscordBot.Modules
         [Command("prompt")]
         public Task Prompt()
             => ReplyAsync(
-                $"The current prompt is: **{Resources.Variables.Prompt}**");
+                $"The current prompt is: **{Properties.Settings.Default.Prompt}**");
     }
 }

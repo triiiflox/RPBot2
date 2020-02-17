@@ -19,7 +19,8 @@ namespace DiscordBot.Modules
                 $"interested - Gives you the Virtual role, use if interested in RPBot updates\n" +
                 $"review - Gives you the Reviewer role, use if interested in revieuweing responses.\n" +
                 $"booksona [URL] - Changes your booksona to the given URL.\n" +
-                $"tr_me [optional opacity 0-100] - get a new tr_endy profile picture\n" +
+                $"tr_me [optional opacity 0-100] - get a new tr_endy profile picture.\n" +
+                $"CreateTempChannel [name] - Creates a new temporary voice channel." +
                 $"```");
     }
 }

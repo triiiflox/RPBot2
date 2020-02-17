@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
+using Microsoft.Extensions.Configuration;
 
 namespace DiscordBot.Services
 {
@@ -12,12 +13,14 @@ namespace DiscordBot.Services
         private readonly DiscordSocketClient _discord;
         private readonly CommandService _commands;
         private IServiceProvider _provider;
+        private IConfiguration _config;
 
         public CommandHandlingService(IServiceProvider provider, DiscordSocketClient discord, CommandService commands)
         {
             _discord = discord;
             _commands = commands;
             _provider = provider;
+            _config = new Program().BuildConfig();
 
             _discord.MessageReceived += MessageReceived;
         }
@@ -36,7 +39,8 @@ namespace DiscordBot.Services
             if (message.Source != MessageSource.User) return;       //ignore messages not originating from user/bot (like welcome messages)
 
             int argPos = 0;
-            if (!message.HasMentionPrefix(_discord.CurrentUser, ref argPos)) return;
+            //if (!message.HasMentionPrefix(_discord.CurrentUser, ref argPos)) return;
+            if (!message.HasStringPrefix(_config["prefix"], ref argPos)) return;
 
             var context = new SocketCommandContext(_discord, message);
             var result = await _commands.ExecuteAsync(context, argPos, _provider);

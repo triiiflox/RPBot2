@@ -2,11 +2,22 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AdminModules\GetResponsesModule_conflict-20191101-160145.cs" />
+    <Compile Remove="Modules\CreateTempChannelModule_conflict-20191102-154539.cs" />
+    <Compile Remove="Modules\TR_Trend.cs" />
+    <Compile Remove="Program_conflict-20191103-130430.cs" />
+    <Compile Remove="Resources\Variables.cs" />
+    <Compile Remove="Services\CommandHandlingService_conflict-20191103-140350.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="config.json" />
+    <None Remove="config_conflict-20191103-130514.json" />
+    <None Remove="Properties\Settings.settings" />
     <None Remove="Resources\tr_Overlay.png" />
   </ItemGroup>
 
@@ -20,6 +31,19 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Resources\Variables.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Discord.Net.WebSocket" Version="1.0.2" />
     <PackageReference Include="Discord.Net.Commands" Version="1.0.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
@@ -28,10 +52,14 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.1" />
     <!-- Remove this line if using another logging sink: -->
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
     <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="mscorlib">
+      <HintPath>mscorlib</HintPath>
+    </Reference>
     <Reference Include="System">
       <HintPath>System</HintPath>
     </Reference>
@@ -49,12 +77,26 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Update="Resources\Settings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
   </ItemGroup>
 
   <ItemGroup>
     <None Update="DataSet1.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
   </ItemGroup>
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.IO.Compression;
 using System.Net;
 using System.Threading.Tasks;
 using Discord.Commands;
@@ -12,9 +14,14 @@ namespace DiscordBot.Modules
         {
             try
             {
+                if (!Directory.Exists("Booksonas/"))
+                {
+                    Directory.CreateDirectory("Booksonas/");
+                }
+
                 using (WebClient webClient = new WebClient())
                 {
-                    webClient.DownloadFile(url, @"/Booksonas/" + Context.User.Username + ".png");
+                    webClient.DownloadFile(url, "Booksonas/" + Context.User.Username + ".png");
                 }
                 return ReplyAsync("Allright, your booksona is now: " + url);
             }

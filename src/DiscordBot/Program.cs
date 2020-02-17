@@ -10,9 +10,9 @@ using DiscordBot.Services;
 
 namespace DiscordBot
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
             => new Program().MainAsync().GetAwaiter().GetResult();
 
         private DiscordSocketClient _client;
@@ -49,7 +49,12 @@ namespace DiscordBot
                 .BuildServiceProvider();
         }
 
-        private IConfiguration BuildConfig()
+        internal IConfiguration Configuration()
+        {
+            return BuildConfig();
+        }
+
+        internal IConfiguration BuildConfig()
         {
             return new ConfigurationBuilder()
                 .SetBasePath(Directory.GetCurrentDirectory())
